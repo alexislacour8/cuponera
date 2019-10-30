@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include 'conexiones/conexion.php';
 	$buscando=$_POST['buscando'];
 	$con= new Conexion();
@@ -24,10 +25,26 @@ echo "<div class='block col-lg-4' style='margin-top: 90px;''>
 
   <div class='bottom'>
     <div class='heading'>las mejores ofertas compra tu cupon</div>
-     <div class='style'><a class='btn btn-success'>Comprar</a></div>
+    ";
+    if (isset($_SESSION["permiso"])) {
+
+      if($_SESSION["permiso"]=="administrador"){
+         echo " <div class='style'><a class='btn btn-info'>Editar</a></div>";
+      }
+      
+      else{
+        echo "<div class='style'><a class='btn btn-success'>Comprar</a></div>";
+      }
+      # code...
+    }
+     else{
+        echo "<div class='style'><a href=http://localhost/cuponera/login.php class='btn btn-success'>Comprar</a></div>";
+      }
+     
     
-    <div class='price'>".$res['precio']." <span class='old-price'> ".$res['precioreal']."</span></div>
+   echo "<div class='price'>".$res['precio']." <span class='old-price'> ".$res['precioreal']."</span></div>
   </div>
+
 </div>";
 	}
 }
