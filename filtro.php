@@ -1,21 +1,19 @@
 <?php 
-
 include 'conexiones/conexion.php';
-$buscar=$_POST['buscar'];
+$filtrar=$_GET['filtrar'];
 $fechaactual=date("Y-m-d");
 $con= new Conexion();
-	$query= $con->prepare("select nombre,cantidad,imagen,fecha,precio,precio*2 as precioreal from productos where fecha >='$fechaactual' and nombre LIKE'%$buscar%'");
+	$query= $con->prepare("select * from productos where fecha >='$fechaactual' and categoria_idcategoria='$filtrar'");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();
 
    
 		# code...
-	
-
 
  ?>
- <!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
@@ -140,14 +138,14 @@ $con= new Conexion();
     </div>
 </div>
 
-<div id="busca">
+<div id="busca" class="container">
  <?php 
  if ($resultado) {
 	# code...
 
  foreach ($resultado as $res ) {
 
-		echo "<div class='block' style='margin-top: 90px;''>
+		echo "<div class='block col-lg-4' style='margin-top: 90px;''>
 
   <div class='top'>
     <ul>
@@ -164,7 +162,7 @@ $con= new Conexion();
   <div class='bottom'>
     <div class='heading'>Chuck Taylor All Star Classic Colours</div>
     
-    <div class='price'>".$res['precio']." <span class='old-price'> ".$res['precioreal']."</span></div>
+    <div class='price'>".$res['precio']." <span class='old-price'> ".$res['precio']."</span></div>
   </div>
 
 </div>";

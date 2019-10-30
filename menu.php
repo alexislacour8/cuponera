@@ -102,7 +102,7 @@ session_start(); ?>
                        
                     </ul>
 
-                    <form id="form" method="GET" action="buscapro.php" class="navbar-form navbar-left" >
+                    <form id="form" method="POST" action="buscapro.php" class="navbar-form navbar-left" >
       <div class="input-group">
 
         <input type="text" class="form-control"  placeholder="¿Que estas buscando?" name="buscar" id="buscar">
@@ -179,7 +179,7 @@ session_start(); ?>
 </div>
 
 <div id="pon" class="col-lg-12 col-xs-12 col-md-12">
-	<div class="col-lg-2 col-md-2">
+	<div class="col-lg-2 col-md-2 hidden-xs hidden-sm">
 		<h3 class="h">Populares</h3>
     <div id="cate">
       
@@ -321,8 +321,12 @@ session_start(); ?>
         echo "";
       }
  ?>
-<!-- WhatsHelp.io widget -->
-
-<!-- /WhatsHelp.io widget -->
+<script>
+    document.getElementById("categorias").onchange = function() {
+        if (this.selectedIndex!==0) {
+            window.location.href = this.value;
+        }        
+    };
+</script>
 </body>
 </html>

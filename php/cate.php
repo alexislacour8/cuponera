@@ -10,7 +10,7 @@ include '../conexiones/conexion.php';
 	foreach ($resultado as $res) {
 		echo"<div class='notice notice-success'>
        
-   		 <strong>".$res['tipo']."</strong></div>";
+   		 <strong><a class='verde' href= http://localhost/cuponera/filtro.php?filtrar=".$res['idcategoria'].">".$res['tipo']."</a></strong></div>";
 	}
 	
 
