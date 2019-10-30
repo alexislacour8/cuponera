@@ -13,7 +13,8 @@ echo "<div class='block col-lg-4' style='margin-top: 90px;''>
     <ul>
       <li><a href='#''><i class='fa fa-star-o' aria-hidden='true'></i></a></li>
       <li><span class='converse'>".$res['nombre']."</span></li>
-      
+     
+      <li><a href='#''><i class='fa fa-shopping-basket' aria-hidden='true'></a></i>
     </ul>
   </div>
 
@@ -22,7 +23,8 @@ echo "<div class='block col-lg-4' style='margin-top: 90px;''>
   </div>
 
   <div class='bottom'>
-    <div class='heading'>Chuck Taylor All Star Classic Colours</div>
+    <div class='heading'>las mejores ofertas compra tu cupon</div>
+     <div class='style'><a class='btn btn-success'>Comprar</a></div>
     
     <div class='price'>".$res['precio']." <span class='old-price'> ".$res['precioreal']."</span></div>
   </div>
