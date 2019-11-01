@@ -4,7 +4,7 @@ include 'conexiones/conexion.php';
 $buscar=$_POST['buscar'];
 $fechaactual=date("Y-m-d");
 $con= new Conexion();
-	$query= $con->prepare("select nombre,cantidad,imagen,fecha,precio,precio*2 as precioreal from productos where fecha >='$fechaactual' and nombre LIKE'%$buscar%'");
+	$query= $con->prepare("select idproductos,nombre,cantidad,imagen,fecha,precio,precio*2 as precioreal from productos where fecha >='$fechaactual' and nombre LIKE'%$buscar%'");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();
@@ -31,6 +31,7 @@ $con= new Conexion();
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="bootstrap/bootstrap.min.js"></script>
+
  
 </head>
 <body>
@@ -140,6 +141,14 @@ $con= new Conexion();
     </div>
 </div>
 
+<br>
+<br>
+<br>
+<br>
+  <center><div class="col-xs-12 col-lg-12">
+  <img class="banner1"  style='margin-top: 70px;' src="image/ofertas.png"></div>
+
+</center>
 <div id="busca" class="container">
  <?php 
  if ($resultado) {
@@ -147,13 +156,13 @@ $con= new Conexion();
 
  foreach ($resultado as $res ) {
 
-		echo "<div class='block col-lg-4' style='margin-top: 90px;''>
+		echo "<div class='block col-lg-4 col-md-4 col-sm-4' style='margin-top: 70px;''>
 
   <div class='top'>
     <ul>
-      <li><a href=><i class='fa fa-star-o' aria-hidden='true'></i></a></li>
+    
       <li><span class='converse'>".$res['nombre']."</span></li>
-      <li><a href=><i class='fa fa-shopping-basket' aria-hidden='true'></a></i>
+     
     </ul>
   </div>
 
@@ -166,16 +175,16 @@ $con= new Conexion();
     if (isset($_SESSION["permiso"])) {
 
       if($_SESSION["permiso"]=="administrador"){
-         echo " <div class='style'><a class='btn btn-info'>Editar</a></div>";
+         echo "<form action='return false' onsubmit='return false' > <input type=text class='hidden' name=id value=".$res['idproductos']." id=id> <div class='style'><input type=submit id=botones value =Editar data-toggle='modal' data-target='#myModal' class='btn btn-info'></div></form>";
       }
       
       else{
-        echo "<div class='style'><a class='btn btn-success'>Comprar</a></div>";
+        echo "<div class='style'><a href=http://localhost/cuponera/decripcion.php?id=".$res['idproductos']." class='btn btn-success'>Ver Oferta</a></div>";
       }
       # code...
     }
      else{
-        echo "<div class='style'><a href=http://localhost/cuponera/login.php class='btn btn-success'>Comprar</a></div>";
+        echo "<div class='style'><a href=http://localhost/cuponera/decripcion.php?id=".$res['idproductos']." class='btn btn-success'>Ver Oferta</a></div>";
       }
      
     
@@ -194,6 +203,32 @@ else{
 
   ?>
   </div>
+  <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editar producto</h4>
+      </div>
+      <div class="modal-body">
+        
+        <form action="return false" onsubmit="return false">
+          <div id="resultados"></div>
+          <div id="resultado"></div>
+        <button type="submit" name="submit" id="actualizar"  class="btn btn-warning"><p class="ini"><i class="fas fa-sign-in-alt"></i>Actualizar</p></button>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+  <script type="text/javascript" src="js/modal.js"></script>
+<script type="text/javascript" src="js/editar.js"></script>
   <script type="text/javascript" src="js/buscandos.js"></script>
  </body>
  </html>
