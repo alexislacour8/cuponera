@@ -16,8 +16,10 @@ session_start(); ?>
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="stylos/stylos.css">
+     <link rel="stylesheet" type="text/css" href="stylos/select2.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/select.js"></script>
+    <script type="text/javascript" src="js/select2.js"></script>
   <script type="text/javascript" src="js/cate.js"></script>
    <script type="text/javascript" src="js/mostrar.js"></script>
   <script src="bootstrap/bootstrap.min.js"></script>
@@ -169,8 +171,8 @@ session_start(); ?>
   <div class="col-lg-2 text-center">
     <h4>Busqueda Filtrada</h4>
   </div>
-  <div class="col-lg-2  col-sm-offset-4 col-xs-offset-1" >
-	<select id="categorias" class="form-control" name="">
+  <div class="col-lg-2  col-sm-offset-0 col-xs-offset-1" >
+	<select id="categorias" class="form-control" name="" style="width: 90%;">
 		
 		
 	</select>
@@ -192,7 +194,7 @@ session_start(); ?>
 <!-- Wrapper for slides -->
 <div id="myCarousel" class="carousel-inner">
 <div class="item active">
-  <div class="holder col-sm-12 col-lg-8 col-md-8">
+  <div class="holder col-sm-12 col-lg-8 col-md-8 col-xs-12">
     <img class="img-responsive" src="image/cel.jpg" alt="...">
      <div class="hidden-lg hidden-md">
   <div class="carousel-caption">
@@ -216,7 +218,7 @@ session_start(); ?>
   </div>
 </div>
 <div class="item">
-  <div class="holder col-sm-12 col-lg-8 col-md-8">
+  <div class="holder col-sm-12 col-lg-8 col-md-8 col-xs-12">
     <img class="img-responsive" src="image/caribe.jpg" alt="...">
  <div class="hidden-lg hidden-md">
   <div class="carousel-caption">
@@ -241,7 +243,7 @@ session_start(); ?>
   </div>
 </div>
 <div class="item">
-  <div class="holder col-sm-12 col-lg-8 col-md-8">
+  <div class="holder col-sm-12 col-lg-8 col-md-8 col-xs-12">
     <img class="img-responsive" src="image/Parrillada.jpg" alt="...">
     <div class="hidden-lg hidden-md">
   <div class="carousel-caption">
@@ -289,6 +291,7 @@ session_start(); ?>
 	<img class="banner1" src="image/imag.png"></div>
 
 </center>
+
 <br>
 <center><div class="col-xs-12 col-lg-12">
 	<img class="banner2" src="image/ahora.png"></div>

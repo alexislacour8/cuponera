@@ -37,7 +37,7 @@
 }
 .product-rating{
   font-size: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
 .product-title{
@@ -123,7 +123,9 @@
   width: 400px;
  
 }
-
+.product>img {
+    width: 300px;
+}
 .service-image-left {
     padding-left: 0px;
 }

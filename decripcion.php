@@ -4,7 +4,7 @@ include 'conexiones/conexion.php';
 $id=$_GET['id'];
 
 $con= new Conexion();
-  $query= $con->prepare("select * from productos where idproductos='$id'");
+  $query= $con->prepare("select productos.nombre as pro ,precio,cantidad,fecha,imagen,localidad,provincia from productos,usuario where idproductos='$id' and idusuario =usuario_idusuario");
 
   $query ->execute();
   $resultado= $query->fetchAll();
@@ -165,11 +165,12 @@ foreach ($resultado as $res) {
         <br>
           
         <div class='col-md-7 marge'>
-          <div class='product-title'>".$res['nombre']."</div>
+          <div class='product-title'>".$res['pro']."</div>
           <br>
           <div class='product-desc'>4 gb de ram  64 memoria interna conexion 4g</div>
            <br>
-          <div class='product-rating'>Oferta Aprovechala<div>
+           <div class='product-rating'>Provincia: ".$res['provincia']."</div>
+          <div class='product-rating'>Localidad: ".$res['localidad']."</div>
           <hr>
           <div class='product-price'>$ ".$res['precio']."</div>
           <div class='product-stock'>Stock ".$res['cantidad']."</div>
@@ -197,18 +198,21 @@ foreach ($resultado as $res) {
             <div class='tab-pane fade in active' id='service-one'>
              
               <section class='container product-info'>
-               <h2>".$res['nombre']."</h2>
+               <h2>".$res['pro']."</h2>
                 <div>
                <h3>Resumen</h3>
                <p>info del articulo</p>
-               <p>".$res['precio']."</p>
-               <p>".$res['fecha']."</p>
+               <p>$".$res['precio']."</p>
+               <p>Oferta valida hasta el ".$res['fecha']."</p>
+               <div class='product-rating'>Ubicacion</div>
+              <div class='product-rating'>Provincia: ".$res['provincia']."</div>
+          <div class='product-rating'>Localidad: ".$res['localidad']."</div>
                <br>
                 </div>
                <center><img id='item-display' src=".$res['imagen']." class='imc col-md-12 col-xs-12'></center>
                <br>
                 <br>
-                 <h3>Como comprar</h3>
+                  <div class='product-rating'>Como comprar</div>
                <p class='col-md-8 col-lg-8'>Luego de hacer click en ¡Compra! vas a poder seleccionar tu dirección de envío.
                   Recibirás notificaciones por mail dentro de las primeras 48 horas indicando el estado de tu envío e instrucciones.
                   Para consultas de cambios o devoluciones podés encontrar las condiciones aquí

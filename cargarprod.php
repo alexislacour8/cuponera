@@ -26,11 +26,12 @@ else{
       <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="stylos/stylos.css">
+    <link rel="stylesheet" type="text/css" href="stylos/select2.css">
    <link rel="stylesheet" type="text/css" href="stylos/valida.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/select2.js"></script>
+   <script type="text/javascript" src="js/categoria.js"></script>
 
-   <script type="text/javascript" src="js/select.js"></script>
-<script type="text/javascript" src="js/validapro.js"></script>
   <script src="bootstrap/bootstrap.min.js"></script>
  
 </head>
@@ -159,20 +160,23 @@ else{
         </div>
         <br>
         
-        <div class="form-group col-lg-6">
+        <div class="form-group col-lg-6 col-xs-12">
         <select id="categorias" name="categorias" class="form-control input-lg  dropdown-toggle" type="button" data-toggle="dropdown" required>
                     <span class="caret"></span>
                   </select>
                   
                 </div>
                  <br>
-                <div class="form-group col-lg-6">
+                    <br class="hidden-lg">
+                      
+                <div class="form-group col-lg-6 col-xs-12">
 
                   <select id="proveedor" name="proveedor" class="form-control input-lg dropdown-toggle" type="button" data-toggle="dropdown" required><span class="caret"></span>
                   </select>
-      
+
                 </div>
                      <br>
+                       <br>
                      <div class="form-group col-lg-6">
                     <input type="text" name="cantidad" id="cantidad" class="form-control input-lg" placeholder="cantidad"><label  id ="mensaje4">Completar campo</label>
         </div>
@@ -234,6 +238,6 @@ document.getElementById('imagen').addEventListener('change', archivo, false)
 </div>
 
 </div>
- 
+ <script type="text/javascript" src="js/validapro.js"></script>
 </body>
 </html>

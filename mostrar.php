@@ -3,7 +3,8 @@
 include 'conexiones/conexion.php';
 
 $con= new Conexion();
-	$query= $con->prepare("select * from productos");
+   $fechaactual=date("Y-m-d");
+	$query= $con->prepare("select * from productos where fecha >= '$fechaactual' LIMIT 6");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();
@@ -14,7 +15,7 @@ foreach ($resultado as $res) {
                  <span><a>".$res['fecha']."</a></span>
                     <div class='card-img'>
                         <img src=".$res['imagen'].">
-                        <span><a>Ver oferta</a></span>
+                        <span><a href=http://localhost/cuponera/decripcion.php?id=".$res['idproductos'].">Ver oferta</a></span>
                        
 
                     </div>
@@ -22,6 +23,7 @@ foreach ($resultado as $res) {
                 </div>
             </div>";
 }
+
 
 
 	?>

@@ -3,19 +3,20 @@
 		
 
 	$con= new Conexion();
-	$query= $con->prepare("select * from usuario where tipousuario ='proveedor'");
+	$query= $con->prepare("select * from subcategoria");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();
- 	$listas = '<option value="0">Elige proveedor</option>';
+ 	$listas = '<option value="0">Elige una categoria</option>';
 	foreach ($resultado as $res) {
-		$listas.="<option value=".$res['idusuario'].">".$res['mail']."</option>";
+		$listas.="<option value=".$res['idcategoria'].">".$res['tipo']."</option>";
 	}
 	echo($listas);
 
 		 ?>
+
 <script type="text/javascript">
   $(document).ready(function(){
-      $('#proveedor').select2();
+      $('#categorias').select2();
   });
 </script>
