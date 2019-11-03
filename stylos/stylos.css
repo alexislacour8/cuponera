@@ -1,11 +1,35 @@
 body{
-    background: #EDF0EF ;
+    background: #fff ;
 }
 .navbar, .dropdown-menu{
 background:#09ba32;
 border: none;
 
 }
+.filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}
+
 h4{
   color: #09ba32;
 }
@@ -272,6 +296,9 @@ img{
 }
 .notice-lo>strong{
   color: #DD6EFA; 
+}
+a.verde{
+  color: #80D651;
 }
 .notice-success {
     border-color: #80D651;
