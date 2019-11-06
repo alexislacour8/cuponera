@@ -9,6 +9,10 @@ function validardatos(){
                 url: "php/datosregistro.php",
                 type: "POST",
                 data: "usuario="+usuario+"&contra="+contra+"&mail="+mail,
+               beforeSend:function(){
+               	 $('#resultado').html("<h3>Proecesando......</h3>");
+               },
+
                 success: function(resp){
               
                    $('#resultado').html(resp);

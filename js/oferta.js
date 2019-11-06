@@ -1,10 +1,10 @@
 $(document).ready(function(){
    $.ajax({
-                url: "php/carrucel.php",
+                url: "php/ofertas.php",
                 type: "POST",
                
                 success: function(resp){
-                 $('#carro').html(resp);
+                 $('#ofert').html(resp);
                
 
                 }       

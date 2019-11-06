@@ -16,13 +16,17 @@ session_start(); ?>
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="stylos/stylos.css">
+    <link rel="stylesheet" type="text/css" href="stylos/ofertas.css">
      <link rel="stylesheet" type="text/css" href="stylos/select2.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/select.js"></script>
     <script type="text/javascript" src="js/select2.js"></script>
   <script type="text/javascript" src="js/cate.js"></script>
    <script type="text/javascript" src="js/mostrar.js"></script>
+   <script type="text/javascript" src="js/oferta.js"></script>
   <script src="bootstrap/bootstrap.min.js"></script>
+
 </head>
 
 <script type="text/javascript">
@@ -59,14 +63,7 @@ session_start(); ?>
                         <li class="active"><a href="#" class="">Inicio</a></li>
                     
                         
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Viajes <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">sur</a></li>
-                                <li><a href="#">patagonia</a></li>
-                                 <li><a href="#">otros lugares</a></li>
-                            </ul>
-                        </li>
-                       
+                      
                        
                     </ul>
                    <ul class="nav navbar-nav">
@@ -78,6 +75,7 @@ session_start(); ?>
                             <ul class='dropdown-menu'>
                                 <li><a href='proveedor.php'>cargar proveedor</a></li>
                                 <li><a href='cargarprod.php''>cargar cupones</a></li>
+                                  <li><a href='editarpro.php''>Editar y Eliminar cupon</a></li>
                                  
                             </ul>
                         </li>";
@@ -291,7 +289,12 @@ session_start(); ?>
 	<img class="banner1" src="image/imag.png"></div>
 
 </center>
-
+<br>
+<br>
+<center><div id="ofert">
+  
+</div>
+ </center>
 <br>
 <center><div class="col-xs-12 col-lg-12">
 	<img class="banner2" src="image/ahora.png"></div>
@@ -313,7 +316,7 @@ session_start(); ?>
 </div><?php 
   if (isset($_SESSION["permiso"])){
 
-            if (($_SESSION["permiso"]=="administrador") ||($_SESSION["permiso"]=="proveedor") ||($_SESSION["permiso"]=="usuario")) {
+            if (($_SESSION["permiso"]=="administrador") ||($_SESSION["permiso"]=="proveedor")) {
 
               echo "<script type='text/javascript' src='mensaje.js'></script>";
 

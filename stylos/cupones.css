@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 body {
-  background: #f9fafa;
+  
   padding: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -20,9 +20,9 @@ body {
       flex-wrap: wrap;
 }
 .block {
-  margin: 20px;
+  margin: 5px;
   border-radius: 4px;
-  width: 280px;
+  width: 270px;
   min-height: 430px;
   background: #fff;
   padding: 23px;
@@ -64,6 +64,7 @@ body {
 }
 .middle img {
   width: 100%;
+  height: 200px;
   
 }
 .bottom {

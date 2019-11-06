@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $('.filterable .btn-filter').click(function(){
         var $panel = $(this).parents('.filterable'),
         $filters = $panel.find('.filters input'),
@@ -12,6 +13,7 @@ $(document).ready(function(){
             $tbody.find('tr').show();
         }
     });
+   
  $.ajax({
                 url: "php/actualiza.php",
                 type: "POST",
@@ -49,3 +51,22 @@ $(document).ready(function(){
         }
     });
 });
+
+function editarpro(cod){
+   parametros={
+    "cod":cod,
+   };
+     $.ajax({
+
+                url: "php/modificar.php",
+                type: "POST",
+                data:parametros,
+               
+                success: function(resp){
+                 $('#edit').html(resp);
+               
+
+                }       
+            });
+   
+}

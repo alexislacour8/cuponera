@@ -132,10 +132,12 @@ else{
 	Include "conexiones/conexion.php";
 	$nume=$_GET["nume"];
 	$con= new Conexion();
-	$query= $con->prepare("SELECT * FROM productos WHERE usuario_idusuario ='$nume'");
+	$query= $con->prepare("SELECT nombre,cantidad,imagen,precio,precio*2 as precioreal FROM productos WHERE usuario_idusuario ='$nume'");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();
+if ($resultado) {
+  # code...
 
 	foreach ($resultado as $res ) {
 
@@ -143,7 +145,7 @@ else{
 
   <div class='top'>
     <ul>
-      <li><a href='#''><i class='fa fa-star-o' aria-hidden='true'></i></a></li>
+    
       <li><span class='converse'>".$res['nombre']."</span></li>
       
     </ul>
@@ -154,16 +156,19 @@ else{
   </div>
 
   <div class='bottom'>
-    <div class='heading'>Chuck Taylor All Star Classic Colours</div>
+    <div class='heading'>Cantidad ".$res['cantidad']." </div>
     
-    <div class='price'>".$res['precio']." <span class='old-price'> ".$res['precio']."</span></div>
+    <div class='price'>".$res['precio']." <span class='old-price'> ".$res['precioreal']."</span></div>
   </div>
 
 </div>";
 		# code...
 	}
 	
-    
+    }
+    else{
+      echo "<br><br><br><center><h2 style='margin-top: 90px;'>tus cupones no han sido cargados aun</h2></center>";
+    }
    
 
 

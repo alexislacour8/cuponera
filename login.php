@@ -35,31 +35,12 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="menu.php" class="">Inicio</a></li>
-                        <li class=" dropdown">
-                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cine</a>
-                           
-                        </li>
-                        <li><a href="addnew.html">Productos</a></li>
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Viajes <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">sur</a></li>
-                                <li><a href="#">patagonia</a></li>
-                                 <li><a href="#">otros lugares</a></li>
-                            </ul>
+                        
                         </li>
                        
                        
                     </ul>
-                    <form class="navbar-form navbar-left" >
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" name="search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+                   
                 </div>
             </div>
         </nav>

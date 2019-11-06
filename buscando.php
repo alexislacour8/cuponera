@@ -1,6 +1,9 @@
 <?php 
 session_start();
 include 'conexiones/conexion.php';
+if ($_POST['buscando']) {
+  # code...
+
 	$buscando=$_POST['buscando'];
 	$con= new Conexion();
 	 $fechaactual=date("Y-m-d");
@@ -28,7 +31,7 @@ echo "<div class='block col-lg-4 col-md-4 col-sm-4' style='margin-top: 70px;''>
     if (isset($_SESSION["permiso"])) {
 
       if($_SESSION["permiso"]=="administrador"){
-         echo "<form action='return false' onsubmit='return false' > <input type=text class='hidden' name=id value=".$res['idproductos']." id=id> <div class='style'><input type=submit id=botones value =Editar data-toggle='modal' data-target='#myModal' class='btn btn-info'></div></form>";
+         echo "";
       }
       
       else{
@@ -46,6 +49,10 @@ echo "<div class='block col-lg-4 col-md-4 col-sm-4' style='margin-top: 70px;''>
 
 </div>";
 	}
+}
+else{
+  echo "<br><br><br><h2 style='margin-top: 90px;'>lo sentimos no se pudo encontrar</h2>";
+}
 }
 else{
 	echo "<br><br><br><h2 style='margin-top: 90px;'>lo sentimos no se pudo encontrar</h2>";

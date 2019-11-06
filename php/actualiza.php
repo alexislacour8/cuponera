@@ -10,7 +10,7 @@ foreach ($resultado as $res) {
 	# code...
   echo "<tr>
           <td align='center'>
-          <a class='btn btn-default'><em class='fa fa-pencil'></em></a>
+          <a href='#edit' onclick='editarpro(".$res['idproductos'].");'class='btn btn-default'><em class='fa fa-pencil'></em></a>
                               <a class='btn btn-danger'><em class='fa fa-trash'></em></a>
                             </td>
                             
@@ -20,7 +20,7 @@ foreach ($resultado as $res) {
                             <td>".$res['proveedro']."</td>
                             <td>".$res['tipo']."</td>
                             <td>".$res['fecha']."</td>
-                             <td><img src=".$res['imagen']." style='width:80px;height:70px;'></td>
+                             <td ><img src=".$res['imagen']." style='width:80px;height:70px;'></td>
                              <td class='hidden'>".$res['idproductos']."</td>
                            
                           </tr>";

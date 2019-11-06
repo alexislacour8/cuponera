@@ -1,7 +1,7 @@
 $(document).ready(function(){
   
    $.ajax({
-                url: "php/select.php",
+                url: "php/categorias.php",
                 type: "POST",
                
                 success: function(resp){

@@ -4,7 +4,7 @@ include 'conexiones/conexion.php';
 $id=$_GET['id'];
 
 $con= new Conexion();
-  $query= $con->prepare("select productos.nombre as pro ,precio,cantidad,fecha,imagen,localidad,provincia from productos,usuario where idproductos='$id' and idusuario =usuario_idusuario");
+  $query= $con->prepare("select productos.nombre as pro,tipo ,precio,cantidad,fecha,imagen,localidad,provincia from productos,usuario,subcategoria where idproductos='$id' and idusuario =usuario_idusuario and idcategoria=categoria_idcategoria");
 
   $query ->execute();
   $resultado= $query->fetchAll();
@@ -49,17 +49,7 @@ $con= new Conexion();
                        
                        
                     </ul>
-                    <ul class="nav navbar-nav hidden-lg hidden-md hidden-sm">
-                        <li class="active"><a href="#" class="">Inicio</a></li>
-                        <li class=" dropdown">
-                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cine</a>
-                           
-                        </li>
-                        <li><a href="addnew.html">Productos</a></li>
-                       
-                       
-                       
-                    </ul>
+                  
                    <ul class="nav navbar-nav">
                       <li class="active"><a href="menu.php" class="">Inicio</a></li>
                     <?php  if (isset($_SESSION["permiso"])){
@@ -136,6 +126,7 @@ $con= new Conexion();
 <br>
 <?php 
 foreach ($resultado as $res) {
+
  echo "<div class='container-fluid'>
     <div class='content-wrapper'> 
     <div class='item-container'>  
@@ -167,17 +158,35 @@ foreach ($resultado as $res) {
         <div class='col-md-7 marge'>
           <div class='product-title'>".$res['pro']."</div>
           <br>
+           <div class='product-title'>".$res['tipo']."</div>
+          <br>
           <div class='product-desc'>4 gb de ram  64 memoria interna conexion 4g</div>
            <br>
            <div class='product-rating'>Provincia: ".$res['provincia']."</div>
           <div class='product-rating'>Localidad: ".$res['localidad']."</div>
           <hr>
           <div class='product-price'>$ ".$res['precio']."</div>
-          <div class='product-stock'>Stock ".$res['cantidad']."</div>
+          <div class='product-stock'>";
+                                if (isset($_SESSION["user"])) {
+                                  echo "<p>Elegir cantidad</p><select class='form-control' name='select' id='cantidad'>";
+                                for($x=1;$x<($res['cantidad'])+1;$x++){
+                                  
+                                   echo " <option value='".$x."'' selected=''>".$x."</option>";
+                                 
+
+                                   }
+                                    echo "</select>";
+                              }
+                              else{
+                                   echo "<h4>stock ".$res['cantidad']."</h4>";
+                              }
+                            
+                              echo "
+                               </div>
           
           <hr>
           <div class='btn-group cart'>
-            <button type='button' id='boton' class='btn btn-success'>
+            <button type='button' id='boton' class='btn btn-success' data-toggle='modal' data-target='#product_view'>
             Comprar
             </button>
           </div>
@@ -242,3 +251,79 @@ foreach ($resultado as $res) {
 
 
  ?>
+
+ <div class="modal fade product_view" id="product_view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title">Desea realizar la compra</h3>
+            </div>
+            <div class="modal-body">
+              <?php  
+                foreach ($resultado as $res) {
+                  # code...
+              if (isset($_SESSION["user"])) {
+    # code...
+                      
+                  echo "<form><div class='row'>
+                    <div class='col-md-6 product_img'>
+                        <img src='".$res['imagen']."'class='img-responsive'>
+                         <div class='product-rating'>Ubicacion</div>
+              <div class='product-rating'>Provincia: ".$res['provincia']."</div>
+          <div class='product-rating'>Localidad: ".$res['localidad']."</div>
+
+                    </div>
+                    <div class='col-md-6 product_content'>
+                        <h4>".$res['pro']."<span></span></h4>
+                        <div class='rating'>
+                            <span class='glyphicon glyphicon-star'></span>
+                            <span class='glyphicon glyphicon-star'></span>
+                            <span class='glyphicon glyphicon-star'></span>
+                            <span class='glyphicon glyphicon-star'></span>
+                            <span class='glyphicon glyphicon-star'></span>
+                        </div>
+                        <p> Recibirás notificacion por mail dentro de las primeras 48 horas indicando el estado de tu envío e instrucciones.Todo lo demas despues de comprar se le brindaran los datos del proveedor que se le enviara via mail como se dice mas el codigo de cupon para canjearlo</p>
+                        <h3 class='cost'><span class='glyphicon glyphicon-usd'></span>".$res['precio']."<small class='pre-cost'></small></h3>
+                        <div class='row'>
+                            <div class='col-lg-12'>
+                            unidades
+                                <p>".$res['cantidad']."</p>
+                            </div>
+                       
+                            <div class='col-md-6 col-sm-6 col-xs-12'>
+                            todas las tarjetas
+                               <img class='img-responsive pull-right' src='http://i76.imgup.net/accepted_c22e0.png'>
+                            </div>
+
+                            <div class='col-lg-12'>
+                            <p>por favor pon tu mail para recibir el cupon</p>
+                    <input type='text' name='producto' id='producto' value='' class='form-control input-lg' placeholder='escribe tu email'>
+                                </div>
+                           <br>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                       <div class='col-lg-12'>
+                        <div class='btn-ground col-lg-12'>
+                            <button type='button' class='btn btn-primary'><span class='glyphicon glyphicon-shopping-cart'></span>Confirmar Comprar</button>
+                           
+                        </div>
+                        </div>
+                          <br>
+                    </div>
+                </div></form>";
+              }
+              else{
+                echo "Lo sentimos para realizar compras tienes que estar logeado
+                <a href='login.php'><button type='button' class='btn btn-primary'></span>Iniciar sesion</button></a>";
+              }
+                }
+
+
+               ?>
+                
+            </div>
+        </div>
+    </div>
+</div>

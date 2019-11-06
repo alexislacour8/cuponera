@@ -15,3 +15,8 @@
 
 		 ?>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('#categorias').select2();
+  });
+</script>

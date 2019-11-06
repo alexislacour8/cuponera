@@ -1,6 +1,6 @@
 <?php
 include '../conexiones/conexion.php';
-
+	
 	$con= new Conexion();
 	$query= $con->prepare("select * from subcategoria");
 

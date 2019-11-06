@@ -8,7 +8,7 @@ if (($_SESSION["permiso"]=="usuario") || ($_SESSION["permiso"]=="proveedor")){
 }
 }
 else{
-  
+   header("location:menu.php");
 }
 
  ?>
@@ -26,12 +26,14 @@ else{
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="stylos/stylos.css">
+   <link rel="stylesheet" type="text/css" href="stylos/valida.css">
      <link rel="stylesheet" type="text/css" href="stylos/select2.css">
+      <link rel="stylesheet" type="text/css" href="stylos/editar.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 
-  
+  <script type="text/javascript" src="js/select2.js"></script>
   <script src="bootstrap/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/buscarpro.js"></script>
+   <script type="text/javascript" src="js/editar.js"></script>
    <script type="text/javascript" src="js/categoria.js"></script>
 
  
@@ -146,26 +148,26 @@ else{
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
+<div id="edit">
+	
+</div>
 
 <div class="container">
     <div class="row">
     
-    <br>
+ 
         <div class="col-md-10 col-md-offset-1">
 	
+   
     <br>
-    <br>
-            <div class="panel panel-default panel-table">
+            <div class=" panel-table">
               <div class="panel-heading">
                 <div class="row">
                   <div class="col col-xs-6">
-                    <h3 class="panel-title">Cupones de productos</h3>
+                    <h3 class="panel-title">Cupones</h3>
                   </div>
                   <div class="col col-xs-6 text-right">
-                    <a href="cargarprod.php"><button type="button" class="btn btn-sm btn-primary btn-create">Crear producto</button></a>
+                  <button type="button" id="refresca" class="btn btn-sm btn-primary btn-create">Actualizar tabla</button>
                   </div>
                 </div>
               </div>
@@ -177,11 +179,11 @@ else{
                 </div>
             </div>
               <div class="panel-body table-responsive">
-                <table class="table">
+                <table class="table table-fixep">
                   <thead>
                     <thead>
                     <tr class="filters">
-                        <th>Editar</th>
+                        <th style="width: 100px;">Editar</th>
                         <th><input type="text" class="form-control" placeholder="Nombre" disabled></th>
                         <th><input type="text" class="form-control" placeholder="precio" disabled ></th>
                         <th><input type="text" class="form-control" placeholder="cantidad" disabled></th>
@@ -203,7 +205,7 @@ else{
               <div class="panel-footer">
                 <div class="row">
                   
-                  <div class="col col-xs-4">Page 1 of 5
+                  <div class="col col-xs-4">
                   </div>
                   <div class="col col-xs-8">
                     <ul class="pagination hidden-xs pull-right" id="myPager">

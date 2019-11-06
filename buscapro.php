@@ -1,6 +1,9 @@
 <?php 
 session_start();
 include 'conexiones/conexion.php';
+if ($_POST['buscar']) {
+  # code...
+
 $buscar=$_POST['buscar'];
 $fechaactual=date("Y-m-d");
 $con= new Conexion();
@@ -9,7 +12,9 @@ $con= new Conexion();
 	$query ->execute();
 	$resultado= $query->fetchAll();
 
-   
+  } 
+  else
+    header("location:menu.php");
 		# code...
 	
 
@@ -66,9 +71,9 @@ $con= new Conexion();
                           
                           echo "<li class='dropdown'><a href='#'' class='dropdown-toggle ' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>administrar<span class='caret'></span></a>
                             <ul class='dropdown-menu'>
-                                <li><a href='#''>cargar proveedor</a></li>
-                                <li><a href='#''>cargar cupones</a></li>
-                                 
+                                <li><a href='proveedor.php'>cargar proveedor</a></li>
+                                <li><a href='cargarprod.php'>cargar cupones</a></li>
+                                 <li><a href='editarpro.php''>Editar y Eliminar cupon</a></li>
                             </ul>
                         </li>";
                         }
@@ -141,12 +146,10 @@ $con= new Conexion();
     </div>
 </div>
 
-<br>
-<br>
-<br>
-<br>
+
+
   <center><div class="col-xs-12 col-lg-12">
-  <img class="banner1"  style='margin-top: 70px;' src="image/ofertas.png"></div>
+  <img class="banner1"  style='margin-top: 50px;' src="image/ofertas.png"></div>
 
 </center>
 <div id="busca" class="container">
@@ -175,7 +178,7 @@ $con= new Conexion();
     if (isset($_SESSION["permiso"])) {
 
       if($_SESSION["permiso"]=="administrador"){
-         echo "<form action='return false' onsubmit='return false' > <input type=text class='hidden' name=id value=".$res['idproductos']." id=id> <div class='style'><input type=submit id=botones value =Editar data-toggle='modal' data-target='#myModal' class='btn btn-info'></div></form>";
+         echo "";
       }
       
       else{

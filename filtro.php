@@ -138,7 +138,11 @@ $con= new Conexion();
         </nav>
     </div>
 </div>
+<center><div class="col-xs-12 col-lg-12">
+  <img class="banner1"  style='margin-top: 50px;' src="image/ofertas.png"></div>
 
+</center>
+<br>
 <div id="busca" class="container">
  <?php 
  if ($resultado) {
@@ -166,7 +170,7 @@ $con= new Conexion();
     if (isset($_SESSION["permiso"])) {
 
       if($_SESSION["permiso"]=="administrador"){
-         echo "<form action='return false' onsubmit='return false' > <input type=text class='hidden' name=id value=".$res['idproductos']." id=id> <div class='style'><input type=submit id=botones value =Editar data-toggle='modal' data-target='#myModal' class='btn btn-info'></div></form>";
+         echo "";
       }
       
       else{
