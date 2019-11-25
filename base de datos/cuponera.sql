@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2019 a las 22:06:41
+-- Tiempo de generación: 23-11-2019 a las 17:02:50
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -35,19 +35,20 @@ CREATE TABLE `cuponventa` (
   `usuario_idusuarios` int(11) NOT NULL,
   `productos_idproductos` int(11) NOT NULL,
   `codigoventa` varchar(8) DEFAULT NULL,
-  `canti` int(11) DEFAULT NULL
+  `canti` int(11) DEFAULT NULL,
+  `estadoven` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cuponventa`
 --
 
-INSERT INTO `cuponventa` (`idcuponventa`, `fecha`, `monto`, `usuario_idusuarios`, `productos_idproductos`, `codigoventa`, `canti`) VALUES
-(1, '2019-11-10', 200000, 1, 1, '45ty56jo', 1),
-(11, '2019-11-13', 23456, 1, 2, 'f5d0bb16', 1),
-(12, '2019-11-16', 2500, 15, 5, 'f6a34283', 1),
-(13, '2019-11-16', 3750, 15, 6, '031ce5e4', 3),
-(14, '2019-11-19', 1000, 15, 4, 'b1e7fb04', 1);
+INSERT INTO `cuponventa` (`idcuponventa`, `fecha`, `monto`, `usuario_idusuarios`, `productos_idproductos`, `codigoventa`, `canti`, `estadoven`) VALUES
+(1, '2019-11-10', 200000, 1, 1, 'f5d0bdb4', 1, 1),
+(11, '2019-11-13', 23456, 1, 2, 'f5d0bb16', 1, 1),
+(12, '2019-11-16', 2500, 15, 5, 'f5d8bp19', 1, 1),
+(13, '2019-11-16', 3750, 15, 6, '031ce5e4', 3, 1),
+(14, '2019-11-19', 1000, 15, 4, 'b1e7fb04', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -89,20 +90,21 @@ CREATE TABLE `productos` (
   `usuario_idusuario` int(11) NOT NULL,
   `imagen` varchar(60) DEFAULT NULL,
   `fecha` date NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `estadopro` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`idproductos`, `nombre`, `precio`, `codgio`, `categoria_idcategoria`, `usuario_idusuario`, `imagen`, `fecha`, `cantidad`) VALUES
-(1, 'celular samsung A8', 18800, '50cb30f9', 6, 6, 'image/cel.jpg', '2019-11-15', 20),
-(2, 'samgsun s10', 23456, 'f2bd07e3', 6, 6, 'image/sams.jpg', '2019-11-17', 48),
-(3, 'viaje a las cataratas', 3500, '5bef94de', 5, 6, 'image/cataratas.jpg', '2019-11-15', 10),
-(4, 'cena para 2', 1000, '00d2e635', 1, 6, 'image/comida.jpg', '2019-11-19', 15),
-(5, 'parrillada para  4', 2500, 'a782770b', 1, 6, 'image/Parrillada.jpg', '2019-11-18', 7),
-(6, 'celular lg k10', 1250, '1de51081', 6, 16, 'image/celu.jpg', '2019-11-24', 12);
+INSERT INTO `productos` (`idproductos`, `nombre`, `precio`, `codgio`, `categoria_idcategoria`, `usuario_idusuario`, `imagen`, `fecha`, `cantidad`, `estadopro`) VALUES
+(1, 'celular samsung A8', 18800, '50cb30f9', 6, 6, 'image/cel.jpg', '2019-11-22', 20, 1),
+(2, 'samgsun s10', 23456, 'f2bd07e3', 6, 6, 'image/sams.jpg', '2019-11-29', 52, 1),
+(3, 'viaje a las cataratas', 3500, '5bef94de', 5, 6, 'image/cataratas.jpg', '2019-11-27', 20, 1),
+(4, 'cena para 2', 1000, '00d2e635', 1, 6, 'image/comida.jpg', '2019-11-30', 16, 1),
+(5, 'parrillada para  4', 2500, 'a782770b', 1, 6, 'image/Parrillada.jpg', '2019-11-30', 14, 1),
+(6, 'celular lg k10', 1250, '1de51081', 6, 16, 'image/celu.jpg', '2019-11-30', 24, 1);
 
 -- --------------------------------------------------------
 
