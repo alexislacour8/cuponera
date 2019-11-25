@@ -4,7 +4,7 @@ include 'conexiones/conexion.php';
 $filtrar=$_GET['filtrar'];
 $fechaactual=date("Y-m-d");
 $con= new Conexion();
-	$query= $con->prepare("select * from productos where fecha >='$fechaactual' and categoria_idcategoria='$filtrar'");
+	$query= $con->prepare("select * from productos where fecha >='$fechaactual' and estadopro = 1 and categoria_idcategoria='$filtrar'");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();
@@ -57,7 +57,7 @@ $con= new Conexion();
                     </ul>
                   
                    <ul class="nav navbar-nav">
-                   	  <li class="active"><a href="menu.php" class="">Inicio</a></li>
+                   	  <li class="active"><a href="index.php" class="">Inicio</a></li>
                     <?php  if (isset($_SESSION["permiso"])){
 
                         if (($_SESSION["permiso"]=="administrador")) {

@@ -1,3 +1,12 @@
+
+
+  <script type="text/javascript">
+  $(window).bind("load resize slid.bs.carousel", function() {
+  var imageHeight = $(".active .holder").height();
+  $(".controllers").height( imageHeight );
+  console.log("Slid");
+});
+</script>
 <?php
 include '../conexiones/conexion.php';
 
@@ -36,7 +45,7 @@ foreach ($resultado as $res) {
     </div>
   </div>
 </div>
-</div>
+
 ";
 }
 echo "<div class='controllers col-sm-8 col-xs-12'>
@@ -55,7 +64,7 @@ echo "<div class='controllers col-sm-8 col-xs-12'>
         }
          
 
- echo "</ol></div>"; 
+ echo "</ol></div></div>"; 
   
 
 

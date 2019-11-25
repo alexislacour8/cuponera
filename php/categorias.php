@@ -3,7 +3,7 @@
 		
 
 	$con= new Conexion();
-	$query= $con->prepare("select * from subcategoria");
+	$query= $con->prepare("select * from subcategoria ");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();

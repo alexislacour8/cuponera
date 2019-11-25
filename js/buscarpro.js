@@ -70,3 +70,41 @@ function editarpro(cod){
             });
    
 }
+function eliminar(id){
+   dato={
+    "id":id,
+   };
+     $.ajax({
+
+                url: "php/eliminar.php",
+                type: "POST",
+                data:dato,
+               
+                success: function(resp){
+                 $('#edit').html(resp);
+               
+
+                }       
+            });
+   
+}
+
+function stock(id){
+   dato={
+    "id":id,
+   };
+     $.ajax({
+
+                url: "php/stockcontrol.php",
+                type: "POST",
+                data:dato,
+               
+                success: function(resp){
+                 $('#edit').html(resp);
+               
+
+                }       
+            });
+   
+}
+

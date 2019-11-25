@@ -9,7 +9,7 @@ function Validar()
                 data: "user="+usuario+"&pass="+contra,
                 success: function(resp){
                   if (resp=="logeado") {
-                   window.location.replace("menu.php");
+                   window.location.replace("index.php");
                   }
                else{
                  $('#resultado').html(resp);

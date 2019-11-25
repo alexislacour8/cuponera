@@ -1,20 +1,20 @@
 <?php 
 session_start();
 include 'conexiones/conexion.php';
-if ($_POST['buscar']) {
+if ($_GET['buscar']) {
   # code...
 
-$buscar=$_POST['buscar'];
+$buscar=$_GET['buscar'];
 $fechaactual=date("Y-m-d");
 $con= new Conexion();
-	$query= $con->prepare("select idproductos,nombre,cantidad,imagen,fecha,precio,precio*2 as precioreal from productos where fecha >='$fechaactual' and nombre LIKE'%$buscar%'");
+	$query= $con->prepare("select idproductos,nombre,cantidad,imagen,fecha,precio,precio*2 as precioreal from productos where fecha >='$fechaactual' and estadopro =1 and nombre LIKE'%$buscar%'");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();
 
   } 
   else
-    header("location:menu.php");
+    header("location:index.php");
 		# code...
 	
 
@@ -64,7 +64,7 @@ $con= new Conexion();
                     </ul>
                   
                    <ul class="nav navbar-nav">
-                   	  <li class="active"><a href="menu.php" class="">Inicio</a></li>
+                   	  <li class="active"><a href="index.php" class="">Inicio</a></li>
                     <?php  if (isset($_SESSION["permiso"])){
 
                         if (($_SESSION["permiso"]=="administrador")) {

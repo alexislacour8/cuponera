@@ -7,7 +7,7 @@ if ($_POST['buscando']) {
 	$buscando=$_POST['buscando'];
 	$con= new Conexion();
 	 $fechaactual=date("Y-m-d");
-	$query= $con->prepare("select idproductos,nombre,cantidad,imagen,fecha,precio,precio*2 as precioreal from productos where fecha >='$fechaactual' and nombre LIKE'%$buscando%'");
+	$query= $con->prepare("select idproductos,nombre,cantidad,imagen,fecha,precio,precio*2 as precioreal from productos where fecha >='$fechaactual' and estadopro =1 and nombre LIKE'%$buscando%'");
 	$query ->execute(array($buscando));
 	$resultado= $query->fetchAll();
 	 if ($resultado) {

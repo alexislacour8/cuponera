@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2019 a las 02:24:14
+-- Tiempo de generación: 20-11-2019 a las 22:06:41
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -32,8 +32,47 @@ CREATE TABLE `cuponventa` (
   `idcuponventa` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `monto` float NOT NULL,
-  `usuario_idusuario` int(11) NOT NULL
+  `usuario_idusuarios` int(11) NOT NULL,
+  `productos_idproductos` int(11) NOT NULL,
+  `codigoventa` varchar(8) DEFAULT NULL,
+  `canti` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cuponventa`
+--
+
+INSERT INTO `cuponventa` (`idcuponventa`, `fecha`, `monto`, `usuario_idusuarios`, `productos_idproductos`, `codigoventa`, `canti`) VALUES
+(1, '2019-11-10', 200000, 1, 1, '45ty56jo', 1),
+(11, '2019-11-13', 23456, 1, 2, 'f5d0bb16', 1),
+(12, '2019-11-16', 2500, 15, 5, 'f6a34283', 1),
+(13, '2019-11-16', 3750, 15, 6, '031ce5e4', 3),
+(14, '2019-11-19', 1000, 15, 4, 'b1e7fb04', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisos`
+--
+
+CREATE TABLE `permisos` (
+  `idpermisos` int(11) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`idpermisos`, `tipo`) VALUES
+(1, 'CARGAR_CUPON'),
+(2, 'EDITAR_ELIMINAR'),
+(3, 'CARGAR_PROVEEDOR'),
+(4, 'EDITAR_PROVEDOR'),
+(6, 'VER_VENTAS'),
+(7, 'COMPRAS'),
+(8, 'VER_MIS_COMPRAS'),
+(9, 'VER_TUS_CUPONES');
 
 -- --------------------------------------------------------
 
@@ -58,21 +97,33 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`idproductos`, `nombre`, `precio`, `codgio`, `categoria_idcategoria`, `usuario_idusuario`, `imagen`, `fecha`, `cantidad`) VALUES
-(2, 'celular samsung', 20000, '3f06a1c2', 3, 2, 'image/cel.jpg', '2019-10-31', 20),
-(3, 'comidas', 2345, '4f11c66f', 1, 2, 'image/comida.jpg', '2019-10-31', 20),
-(4, 'viajes', 8500, '180f8e72', 5, 4, 'image/cataratas.jpg', '2019-10-30', 10),
-(5, 'viajes', 3500, '9b178fe0', 3, 4, 'image/bariloche.jpg', '2019-10-28', 3);
+(1, 'celular samsung A8', 18800, '50cb30f9', 6, 6, 'image/cel.jpg', '2019-11-15', 20),
+(2, 'samgsun s10', 23456, 'f2bd07e3', 6, 6, 'image/sams.jpg', '2019-11-17', 48),
+(3, 'viaje a las cataratas', 3500, '5bef94de', 5, 6, 'image/cataratas.jpg', '2019-11-15', 10),
+(4, 'cena para 2', 1000, '00d2e635', 1, 6, 'image/comida.jpg', '2019-11-19', 15),
+(5, 'parrillada para  4', 2500, 'a782770b', 1, 6, 'image/Parrillada.jpg', '2019-11-18', 7),
+(6, 'celular lg k10', 1250, '1de51081', 6, 16, 'image/celu.jpg', '2019-11-24', 12);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos_has_cuponventa`
+-- Estructura de tabla para la tabla `roles`
 --
 
-CREATE TABLE `productos_has_cuponventa` (
-  `productos_idproductos` int(11) NOT NULL,
-  `cuponventa_idcuponventa` int(11) NOT NULL
+CREATE TABLE `roles` (
+  `idroles` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `permisos` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`idroles`, `nombre`, `permisos`) VALUES
+(1, 'administrador', '1,2,3,4'),
+(2, 'usuario', '7,8'),
+(3, 'proveedor', '6,9');
 
 -- --------------------------------------------------------
 
@@ -91,11 +142,11 @@ CREATE TABLE `subcategoria` (
 
 INSERT INTO `subcategoria` (`idcategoria`, `tipo`) VALUES
 (1, 'gastronomia'),
-(2, 'productos'),
-(3, 'tecnologia'),
-(4, 'cine'),
+(2, 'servicios'),
+(3, 'cine'),
+(4, 'productos'),
 (5, 'viajes'),
-(6, 'servicios');
+(6, 'tecnologia');
 
 -- --------------------------------------------------------
 
@@ -107,7 +158,7 @@ CREATE TABLE `usuario` (
   `idusuario` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `mail` varchar(45) NOT NULL,
-  `tipousuario` varchar(45) NOT NULL,
+  `tipousuario` int(11) NOT NULL,
   `contrasena` varchar(45) NOT NULL,
   `provincia` varchar(45) DEFAULT NULL,
   `localidad` varchar(45) DEFAULT NULL,
@@ -120,18 +171,12 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `nombre`, `mail`, `tipousuario`, `contrasena`, `provincia`, `localidad`, `direccion`, `estado`) VALUES
-(1, 'jose', 'gonzalez@gmail.com', 'administrador', '123456', NULL, NULL, NULL, ''),
-(2, 'ramos jun', 'calor@gmail.com', 'proveedor', '123456', 'Buenos Aires', 'Abasto', 'segui 878', ''),
-(3, 'alexis ezequiel', 'alexislacour08@gmail.com', 'usuario', '123456', NULL, NULL, NULL, ''),
-(4, 'hugo juan', 'hugo@gmail.com', 'proveedor', '123456', 'Buenos Aires', 'Agustin Roca', 'segui 878', ''),
-(8, 'Miguel angel', 'miguelacour@gmail.com', 'usuario', '123456', NULL, NULL, NULL, ''),
-(9, 'juan ramos', 'calor@gmail.com', 'usuario', '123456', NULL, NULL, NULL, '406a11c697b4f012abd5c79025c39784'),
-(10, 'juan dias', 'alex@gef.com', 'usuario', '123456', NULL, NULL, NULL, '1034688e77d20392417b4ca354d6770b'),
-(11, 'alexis ezequiel', 'juanjose@gmial.com', 'usuario', '123456', NULL, NULL, NULL, '51286ca8516109ce0e87905a9df04031'),
-(12, 'juan fee', 'ofertasaldia07@gmail.com', 'usuario', '123456', NULL, NULL, NULL, '4dba34106be5c9b203d236f1dbfb0147'),
-(13, 'juan ramos', 'juan@gmail.com', 'usuario', '123456', NULL, NULL, NULL, '965354eaef0f0ea5cb1e7aa975903d55'),
-(14, 'RAMON DIAS', 'ramos12@gmail.com', 'proveedor', '123456', 'Buenos Aires', 'Abasto', 'segui 878', ''),
-(15, 'luis desi', 'juanjose@gmial.com', 'proveedor', '123456', 'Buenos Aires', 'Abasto', 'segui 878', '');
+(1, 'alexis ezequiel', 'alexislacour08@gmail.com', 2, '123456', NULL, NULL, NULL, ''),
+(3, 'juan', 'gonzalez@gmail.com', 1, '123456', NULL, NULL, NULL, ''),
+(6, 'juan ramos', 'calor@gmail.com', 3, '123456', 'Buenos Aires', 'Abasto', 'segui 878', ''),
+(14, 'alexis ezequiel', 'alexislacour8@gmail.com', 2, '123456', NULL, NULL, NULL, 'd3e90ef382d1853e5b996ef53818b849'),
+(15, 'juan ramos', 'ofertasaldia07@gmail.com', 2, '123456', NULL, NULL, NULL, ''),
+(16, 'hugo juan', 'hugo@gmail.com', 3, '123456', 'Buenos Aires', 'Aeropuerto Internacional Ezeiza', 'moreno123', '');
 
 --
 -- Índices para tablas volcadas
@@ -144,10 +189,22 @@ ALTER TABLE `cuponventa`
   ADD PRIMARY KEY (`idcuponventa`);
 
 --
+-- Indices de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD PRIMARY KEY (`idpermisos`);
+
+--
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`idproductos`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`idroles`);
 
 --
 -- Indices de la tabla `subcategoria`
@@ -169,13 +226,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cuponventa`
 --
 ALTER TABLE `cuponventa`
-  MODIFY `idcuponventa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcuponventa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idproductos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idproductos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
@@ -187,7 +244,7 @@ ALTER TABLE `subcategoria`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

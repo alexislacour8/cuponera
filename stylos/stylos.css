@@ -6,6 +6,23 @@ background:#09ba32;
 border: none;
 
 }
+.fotos{
+  padding: 2px;
+  width: 40%;
+  margin-bottom: 2%;
+  position:relative;
+  border-radius: 5px;
+}
+#imagen{
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
 .filterable {
     margin-top: 15px;
 }
@@ -187,16 +204,14 @@ img{
 
 }
 
-.input-group{
- left: 364px;
-}
+
 .form-group{
   margin-bottom: 30px;
 
 }
 @media(max-width: 991px){
   .input-group{
- left: 130px;
+ left: 90px;
 }
 .form-group{
   margin-bottom: 10px;

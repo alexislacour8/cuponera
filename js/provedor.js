@@ -58,7 +58,9 @@ function validardatos(){
                
 
                 }       
-            });   
+            });  
+
+   
 }
 
 
@@ -71,8 +73,9 @@ $(document).ready(function() {
 			var mail = $("#mail").val();
 			
 			var contra =$("#contra").val();
+			var direccion =$("#direc").val();
 			var matches = nombre.match(/\S+/g);
-			var expre =/^[a-zA-Z\s]*$/;
+			var expre =/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/;
 			var exp=/[a-zA-Z0-9]/;
 			
 			if (nombre=="") {
@@ -109,20 +112,35 @@ $(document).ready(function() {
 		else{
 			$("#mensaje2").fadeOut();
 		}
-		if (contra=="") {
+		if (direccion=="") {
 			$("#mensaje3").fadeIn();
 				return false;
 		}
-		if (!exp.test(contra)) {
-			$("#mensaje3").text("no se admiten espacios ni caracteres especiales").fadeIn();
+		if (direccion.length < 3 || direccion.length >35) {
+			$("#mensaje3").text("direcion invalida").fadeIn();
 				return false;
 		}
-		if (contra.length < 6 || contra.length > 8) {
-			$("#mensaje3").text("minimos 6 maximo 8 caracteres").fadeIn();
+		if (!exp.test(direccion)) {
+			$("#mensaje3").text("no se admiten espacios ni caracteres especiales").fadeIn();
 				return false;
 		}
 		else{
 			$("#mensaje3").fadeOut();
+		}
+		if (contra=="") {
+			$("#mensaje4").fadeIn();
+				return false;
+		}
+		if (!exp.test(contra)) {
+			$("#mensaje4").text("no se admiten espacios ni caracteres especiales").fadeIn();
+				return false;
+		}
+		if (contra.length < 6 || contra.length > 8) {
+			$("#mensaje4").text("minimos 6 maximo 8 caracteres").fadeIn();
+				return false;
+		}
+		else{
+			$("#mensaje4").fadeOut();
 		}
                 validardatos();
             }); 

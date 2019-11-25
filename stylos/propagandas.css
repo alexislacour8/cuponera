@@ -125,6 +125,7 @@
 }
 .product>img {
     width: 300px;
+    height: 300px;
 }
 .service-image-left {
     padding-left: 0px;

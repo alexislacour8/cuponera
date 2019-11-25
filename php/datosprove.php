@@ -10,19 +10,18 @@ if (isset($_POST["usuario"])and isset($_POST["contra"]) and isset($_POST["mail"]
     $provi=$_POST["provincia"];
     $locali=$_POST["ciudad"];
     $dir=$_POST["direc"];
-    $permi="proveedor";
+    $permi=3;
 
-    $resultado= guardarpro($nom,$mails,$permi,$contra,$provi,$locali,$dir);
-
-    if ($resultado) {
-
-    	 echo "<div class='alert alert-danger'>
-    <strong>Error!</strong> <a href='#' class='alert-link'>al guardar</a>.
+   
+if ( repetidos($mails)) {
+ 
+   echo "<div class='alert alert-danger'>
+    <strong>Error!</strong> <a href='#' class='alert-link'>ya se ha registrado es mail</a>.
   </div>";
-    	# code...
     }
+   
     else{
-    	
+    	guardarpro($nom,$mails,$permi,$contra,$provi,$locali,$dir);
       echo "<div class='alert alert-success alert-dismissible'>
     <a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
     <strong>Se ha dado de alto</strong>el proveedor ".$nom."

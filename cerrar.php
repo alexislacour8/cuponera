@@ -3,6 +3,6 @@ session_start();
 
 session_destroy();
 
-header("location: menu.php");
+header("location: index.php");
 
  ?>

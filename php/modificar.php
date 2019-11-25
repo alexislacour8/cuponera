@@ -1,4 +1,5 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylos/valida.css">
 <?php 
 include '../conexiones/conexion.php';
 $id=$_POST['cod'];
@@ -17,16 +18,20 @@ foreach ($resultado as $res) {
          <div class='form-group col-lg-12 hidden'>
                     <input type='text' name='id' id='id' value='".$res['idproductos']."' class='form-control input-lg' placeholder='Nombre'><label  id ='mensaje1'>Completar campo</label>
         </div>
+         <br>
+          <br>
         <div class='form-group col-lg-12'>
+         <p>nombre</p>
                     <input type='text' name='producto' id='producto' value='".$res['pro']."' class='form-control input-lg' placeholder='Nombre'><label  id ='mensaje1'>Completar campo</label>
         </div>
                 <br>
-               
+                <br>
         <div class='form-group col-lg-12'>
+         <p>precio</p>
                     <input type='number' name='precio'  value='".$res['precio']."' id='precio' class='form-control input-lg' placeholder='precio'><label  id ='mensaje2'>Completar campo</label>
         </div>
         <br>
-        
+         <br>
         <div class='form-group col-lg-6 col-xs-12'>
         <select id='categorias' name='categorias' class='form-control input-lg  dropdown-toggle' type='button' data-toggle='dropdown' required>
                     <span class='caret'></span>
@@ -35,6 +40,7 @@ foreach ($resultado as $res) {
                   
                 </div>
                  <br>
+                  <br>
                     <br class='hidden-lg'>
                       
                 <div class='form-group col-lg-6 col-xs-12'>
@@ -46,22 +52,23 @@ foreach ($resultado as $res) {
                 </div>
                      <br>
                        <br>
-                     <div class='form-group col-lg-6'>
-                    <input type='text' name='cantidad' id='cantidad'  value='".$res['cantidad']."' class='form-control input-lg' placeholder='cantidad'><label  id ='mensaje4'>Completar campo</label>
-        </div>
+                   
                    
                      <br>
-        <div class='form-group col-lg-6'>
+        <div class='form-group col-lg-12'>
+
                     <input type='date' name='fecha' id='fecha'  value='".$res['fecha']."' class='form-control input-lg' placeholder='Contraseña'><label  id ='mensaje3'Completar campo</label>
         </div>
         <br>
          
-                        <div class='form-group'>
+                        <div class='form-group col-lg-12'>
 
                              <label class='col-md-4 control-label' for='exampleFormControlFile1'>guardar</label>
-                             
+                            <center><output id='list'></output></center>
+                              <div class='fotos btn btn-success col-lg-12'>
                        <input type='file' class='form-control-file'  value='".$res['imagen']."' name='imagen' id='imagen'>
-                        <output id='list'></output>
+                        subir foto
+                        </div>
           
               <script>
                     $( document ).ready(function() {

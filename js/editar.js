@@ -5,6 +5,12 @@ $(document).ready(function(){
              
               
             }); 
+  $("#stockbajos").click(function() { 
+
+               stockbajos();
+             
+              
+            }); 
          
   $("#actualizar").click(function() { 
 
@@ -24,9 +30,10 @@ function editar(){
     paqueteDeDatos.append("proveedor",$('#proveedor').val());
     paqueteDeDatos.append("cantidad",$('#cantidad').val());
     paqueteDeDatos.append("fecha",$('#fecha').val());
+    if ($('#imagen')[0].files[0]){
     paqueteDeDatos.append("imagen",$('#imagen')[0].files[0]);
     
-    
+    }
     
    $.ajax({
 
@@ -56,6 +63,19 @@ function editar(){
 function refrescar(){
    $.ajax({
                 url: "php/actualiza.php",
+                type: "POST",
+               
+                success: function(resp){
+                 $('#myTable').html(resp);
+               
+
+                }       
+            });
+}
+
+function stockbajos(){
+   $.ajax({
+                url: "php/stock.php",
                 type: "POST",
                
                 success: function(resp){

@@ -28,10 +28,21 @@ function validarproductos(){
                 }       
             });   
 }
-
+window.onload = function(){
+ 
+  var fecha = new Date(); //Fecha actual
+  var mes = fecha.getMonth()+1; //obteniendo mes
+  var dia = fecha.getDate(); //obteniendo dia
+  var ano = fecha.getFullYear(); //obteniendo año
+  if(dia<10)
+    dia='0'+dia; //agrega cero si el menor de 10
+  if(mes<10)
+    mes='0'+mes //agrega cero si el menor de 10
+  document.getElementById('fecha').value=ano+"-"+mes+"-"+dia;
+}
 $(document).ready(function() { 
             $("#boton").click(function() { 
-                var producto = $('#producto').val();
+                 var producto = $('#producto').val();
                     var categorias = $('#categorias :selected').val();
                     var proveedor = $('#proveedor :selected').val();
                     var precio = $('#precio').val();
@@ -39,8 +50,15 @@ $(document).ready(function() {
                     var fecha = $('#fecha').val();
                     var matchess = producto.match(/\S+/g);
                     var expre =/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/;
-                    var hoy = new Date();
-                    
+                    var fecha1 = new Date(); //Fecha actual
+                      var mes = fecha1.getMonth()+1; //obteniendo mes
+                      var dia = fecha1.getDate(); //obteniendo dia
+                      var ano = fecha1.getFullYear(); //obteniendo año
+ if(dia<10)
+    dia='0'+dia; //agrega cero si el menor de 10
+  if(mes<10)
+    mes='0'+mes //agrega cero si el menor de 10
+  fech=ano+"-"+mes+"-"+dia;
                     if (producto=="") {
                         $("#mensaje1").fadeIn();
                             return false;
@@ -57,8 +75,13 @@ $(document).ready(function() {
                         $("#mensaje1").fadeOut();
                     }
                     if (precio=="") {
-                        
+
                         $("#mensaje2").fadeIn();
+                        return false;
+                    }
+                     if (isNaN(precio)) {
+
+                        $("#mensaje2").text("solo numeros").fadeIn();
                         return false;
                     }
                     if (precio== 0) {
@@ -72,12 +95,12 @@ $(document).ready(function() {
                     if (precio.length < 1 || precio.length > 10) {
                         $("#mensaje2").text("minimo 1 maximo 10 caracteres").fadeIn();
                             return false;
-                        
+
                     }
                     else{
                         $("#mensaje2").fadeOut();
                     }
-                    if (hoy < fecha) {
+                    if (fech > fecha) {
                         $("#mensaje3").text("ingrese fecha valida").fadeIn();
                             return false;
                     }
@@ -85,7 +108,7 @@ $(document).ready(function() {
                         $("#mensaje3").fadeOut();
                     }
                     if (cantidad=="") {
-                        
+
                         $("#mensaje4").fadeIn();
                         return false;
                     }
@@ -103,9 +126,8 @@ $(document).ready(function() {
                     }
                     else{
                         $("#mensaje4").fadeOut();
-                        
+
                     }
-                
                 validarproductos();
             }); 
         });

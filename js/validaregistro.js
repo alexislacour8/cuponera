@@ -10,7 +10,7 @@ function validardatos(){
                 type: "POST",
                 data: "usuario="+usuario+"&contra="+contra+"&mail="+mail,
                beforeSend:function(){
-               	 $('#resultado').html("<h3>Proecesando......</h3>");
+               	 $('#resultado').html("<div class='col-md-6'><div class='progress-outer'><div class='progress'><div class='progress-bar progress-bar-info progress-bar-striped active' style='width:99%; box-shadow:-1px 10px 10px rgba(91, 192, 222, 0.7);''></div><div class='progress-value'>99%</div></div></div>");
                },
 
                 success: function(resp){
@@ -34,7 +34,7 @@ $(document).ready(function() {
 			
 			var contra =$("#contra").val();
 			var matches = nombre.match(/\S+/g);
-			var expre =/^[a-zA-Z\s]*$/;
+			 var expre =/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/;
 			var exp=/[a-zA-Z0-9]/;
 			
 			if (nombre=="") {
@@ -42,7 +42,10 @@ $(document).ready(function() {
 				return false;
 			}
 			
-		
+		if (!expre.test(nombre)) {
+			$("#mensaje1").text("no se admiten numeros").fadeIn();
+				return false;
+		}
 		if (matches.length < 2) {
 			$("#mensaje1").text("nombre completo").fadeIn();
 				return false;
@@ -51,10 +54,7 @@ $(document).ready(function() {
 			$("#mensaje1").text("3 caracteres minimo por palabra").fadeIn();
 				return false;
 		}
-		if (!expre.test(nombre)) {
-			$("#mensaje1").text("no se admiten numeros").fadeIn();
-				return false;
-		}
+		
 		
 		else{
 			$("#mensaje1").fadeOut();

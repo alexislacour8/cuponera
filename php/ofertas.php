@@ -4,7 +4,7 @@ include '../conexiones/conexion.php';
 
 $con= new Conexion();
    $fechaactual=date("Y-m-d");
-	$query= $con->prepare("select * from productos where fecha >= '$fechaactual' LIMIT 4");
+	$query= $con->prepare("select * from productos where fecha >= '$fechaactual' and estadopro=1 LIMIT 4");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();

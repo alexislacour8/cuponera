@@ -1,11 +1,10 @@
 <?php session_start();
-
+require_once "conexiones/verificarpermiso.php";
 include 'conexiones/conexion.php';
 $id=$_GET['id'];
 
 $con= new Conexion();
-  $query= $con->prepare("select productos.nombre as pro,tipo ,precio,cantidad,fecha,imagen,localidad,provincia from productos,usuario,subcategoria where idproductos='$id' and idusuario =usuario_idusuario and idcategoria=categoria_idcategoria");
-
+  $query= $con->prepare("select productos.nombre as pro,tipo ,precio,cantidad,fecha,imagen,localidad,provincia,idproductos from productos,usuario,subcategoria where idproductos='$id' and idusuario =usuario_idusuario and idcategoria=categoria_idcategoria");
   $query ->execute();
   $resultado= $query->fetchAll();
 
@@ -19,11 +18,15 @@ $con= new Conexion();
 
  <link rel="stylesheet" type="text/css" href="stylos/stylos.css">
  <link rel="stylesheet" type="text/css" href="stylos/propagandas.css">
+ 
+ 
  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/modal.js"></script>
 
-  
+
+<!-- If you're using Stripe for payments -->
+
 
   <script src="bootstrap/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
@@ -51,30 +54,7 @@ $con= new Conexion();
                     </ul>
                   
                    <ul class="nav navbar-nav">
-                      <li class="active"><a href="menu.php" class="">Inicio</a></li>
-                    <?php  if (isset($_SESSION["permiso"])){
-
-                        if (($_SESSION["permiso"]=="administrador")) {
-                          
-                          echo "<li class='dropdown'><a href='#'' class='dropdown-toggle ' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>administrar<span class='caret'></span></a>
-                            <ul class='dropdown-menu'>
-                                <li><a href='proveedor.php'>cargar proveedor</a></li>
-                                <li><a href='cargarprod.php'>cargar cupones</a></li>
-                                 
-                            </ul>
-                        </li>";
-                        }
-
-
-                    }else{
-                      echo "";
-                    }
-
-                    ?>
-                       
-                       
-                       
-                       
+                     
                     </ul>
 
                   
@@ -165,17 +145,34 @@ foreach ($resultado as $res) {
            <div class='product-rating'>Provincia: ".$res['provincia']."</div>
           <div class='product-rating'>Localidad: ".$res['localidad']."</div>
           <hr>
+          <form action='return false' onsubmit='return false'>
+          <input class='hidden' value='".$res['pro']."' id='producto'>
+           <input class='hidden' value='".$res['precio']."' id='precio'>
+            <input class='hidden' value='".$res['idproductos']."' id='id'>
           <div class='product-price'>$ ".$res['precio']."</div>
           <div class='product-stock'>";
-                                if (isset($_SESSION["user"])) {
-                                  echo "<p>Elegir cantidad</p><select class='form-control' name='select' id='cantidad'>";
-                                for($x=1;$x<($res['cantidad'])+1;$x++){
+                                if (verificarpermiso("COMPRAS")) {
+                                  if ($res['cantidad'] > 0) {
+                                    # code...
                                   
-                                   echo " <option value='".$x."'' selected=''>".$x."</option>";
-                                 
+                                  echo "<p>Disponibles</p><select class='form-control' name='select' id='cantidad'>";
 
-                                   }
+                                for($x=1;$x<($res['cantidad'])+1;$x++){
+                                 
+                                    if ($x==1) {
+                                     echo "<option value='".$x."''>".$x."</option>";
+                                    }
+                                  else{
+                                   echo "<option value='".$x."'' >".$x."</option>";
+                                 }
+                                     }
+                                 
+                                   
                                     echo "</select>";
+                                  }
+                                  else{
+                                    echo "<h4>stock ".$res['cantidad']."</h4>";
+                                  }
                               }
                               else{
                                    echo "<h4>stock ".$res['cantidad']."</h4>";
@@ -186,9 +183,10 @@ foreach ($resultado as $res) {
           
           <hr>
           <div class='btn-group cart'>
-            <button type='button' id='boton' class='btn btn-success' data-toggle='modal' data-target='#product_view'>
+            <button type='submit' id='botones' class='btn btn-success' data-toggle='modal' data-target='#product_view'>
             Comprar
             </button>
+            <form>
           </div>
          
         </div>
@@ -260,70 +258,14 @@ foreach ($resultado as $res) {
                 <h3 class="modal-title">Desea realizar la compra</h3>
             </div>
             <div class="modal-body">
-              <?php  
-                foreach ($resultado as $res) {
-                  # code...
-              if (isset($_SESSION["user"])) {
-    # code...
-                      
-                  echo "<form><div class='row'>
-                    <div class='col-md-6 product_img'>
-                        <img src='".$res['imagen']."'class='img-responsive'>
-                         <div class='product-rating'>Ubicacion</div>
-              <div class='product-rating'>Provincia: ".$res['provincia']."</div>
-          <div class='product-rating'>Localidad: ".$res['localidad']."</div>
-
-                    </div>
-                    <div class='col-md-6 product_content'>
-                        <h4>".$res['pro']."<span></span></h4>
-                        <div class='rating'>
-                            <span class='glyphicon glyphicon-star'></span>
-                            <span class='glyphicon glyphicon-star'></span>
-                            <span class='glyphicon glyphicon-star'></span>
-                            <span class='glyphicon glyphicon-star'></span>
-                            <span class='glyphicon glyphicon-star'></span>
-                        </div>
-                        <p> Recibirás notificacion por mail dentro de las primeras 48 horas indicando el estado de tu envío e instrucciones.Todo lo demas despues de comprar se le brindaran los datos del proveedor que se le enviara via mail como se dice mas el codigo de cupon para canjearlo</p>
-                        <h3 class='cost'><span class='glyphicon glyphicon-usd'></span>".$res['precio']."<small class='pre-cost'></small></h3>
-                        <div class='row'>
-                            <div class='col-lg-12'>
-                            unidades
-                                <p>".$res['cantidad']."</p>
-                            </div>
-                       
-                            <div class='col-md-6 col-sm-6 col-xs-12'>
-                            todas las tarjetas
-                               <img class='img-responsive pull-right' src='http://i76.imgup.net/accepted_c22e0.png'>
-                            </div>
-
-                            <div class='col-lg-12'>
-                            <p>por favor pon tu mail para recibir el cupon</p>
-                    <input type='text' name='producto' id='producto' value='' class='form-control input-lg' placeholder='escribe tu email'>
-                                </div>
-                           <br>
-                            </div>
-                            <!-- end col -->
-                        </div>
-                       <div class='col-lg-12'>
-                        <div class='btn-ground col-lg-12'>
-                            <button type='button' class='btn btn-primary'><span class='glyphicon glyphicon-shopping-cart'></span>Confirmar Comprar</button>
-                           
-                        </div>
-                        </div>
-                          <br>
-                    </div>
-                </div></form>";
-              }
-              else{
-                echo "Lo sentimos para realizar compras tienes que estar logeado
-                <a href='login.php'><button type='button' class='btn btn-primary'></span>Iniciar sesion</button></a>";
-              }
-                }
-
-
-               ?>
-                
+             <div id="resultados">
+   
+             </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+

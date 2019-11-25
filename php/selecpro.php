@@ -3,7 +3,7 @@
 		
 
 	$con= new Conexion();
-	$query= $con->prepare("select * from usuario where tipousuario ='proveedor'");
+	$query= $con->prepare("select * from usuario where tipousuario = 3");
 
 	$query ->execute();
 	$resultado= $query->fetchAll();
