@@ -49,7 +49,7 @@ $(document).ready(function() {
                     var cantidad = $('#cantidad').val();
                     var fecha = $('#fecha').val();
                     var matchess = producto.match(/\S+/g);
-                    var expre =/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/;
+                    var expre =/[a-zA-Z0-9]/;
                     var fecha1 = new Date(); //Fecha actual
                       var mes = fecha1.getMonth()+1; //obteniendo mes
                       var dia = fecha1.getDate(); //obteniendo dia
@@ -63,12 +63,17 @@ $(document).ready(function() {
                         $("#mensaje1").fadeIn();
                             return false;
                     }
+                    if (producto.length >35) {
+                         $("#mensaje1").text("maximo de 35 caracteres").fadeIn();
+                            return false;
+                    }
                     if (matchess[0].length <3) {
                         $("#mensaje1").text("3 caracteres minimo por favor").fadeIn();
                             return false;
                     }
+
                     if (!expre.test(producto)) {
-                        $("#mensaje1").text("no se admiten numeros").fadeIn();
+                        $("#mensaje1").text("no se admiten caracteres especiales").fadeIn();
                             return false;
                     }
                     else{
