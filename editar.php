@@ -31,9 +31,16 @@ else{
 	
 	$resultado= $query->fetch();
 }
+if (!is_numeric($precio)) {
+	echo " <div class='alert alert-danger alert-dismissible fade in'>
+    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+    <strong>ERROR faltal!</strong>no se admineten letras
+  </div>
+</div>";
 
-
-	if ($query ->execute()) {
+}
+ 
+	elseif ($query ->execute()) {
 $resultado= $query->fetch();
 		 echo "<center><div class='col-lg-4'>
 		 <div class='alert alert-success alert-dismissible'>
@@ -46,6 +53,7 @@ $resultado= $query->fetch();
 	else{
 		echo "error";
 	}
+
 }
 else{
 	echo " <div class='alert alert-danger alert-dismissible fade in'>
